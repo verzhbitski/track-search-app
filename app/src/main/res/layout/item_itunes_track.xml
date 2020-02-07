@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="track"
+            type="org.verzhbitski.tracksearchapp.model.itunes.entity.Track"
+            />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_itunes_height"
+        android:paddingStart="@dimen/item_padding"
+        android:paddingEnd="@dimen/item_padding"
+        >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/item_itunes_image_size"
+            android:layout_height="@dimen/item_itunes_image_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{track.artworkUrl100}"
+            tools:src="@drawable/ic_album" />
+
+        <TableLayout
+            android:id="@+id/name_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image"
+            android:shrinkColumns="0"
+            >
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/image"
+                    style="@style/itunes_text_track_name"
+                    android:text="@{track.trackName}"
+                    tools:text="Yonkers"
+                    />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_explicit"
+                    android:visibility="@{track.trackExplicitness.equals(`explicit`) ? View.VISIBLE : View.GONE}"
+                    />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_wrapper"
+            app:layout_constraintBottom_toTopOf="@id/album"
+            android:text="@{track.artistName}"
+            style="@style/text"
+            tools:text="Tyler, The Creator"
+            />
+
+        <TextView
+            android:id="@+id/album"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/image"
+            android:text="@{String.format(@string/itunes_collection_template, track.collectionName, track.releaseDate.substring(0, 4))}"
+            style="@style/text"
+            tools:text="GOBLIN • 2011"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

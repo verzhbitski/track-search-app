@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="track"
+            type="org.verzhbitski.tracksearchapp.model.lastfm.entity.Track"
+            />
+
+        <variable
+            name="cover"
+            type="org.verzhbitski.tracksearchapp.model.lastfm.entity.Image"
+            />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_last_fm_height"
+        android:paddingStart="@dimen/item_padding"
+        android:paddingEnd="@dimen/item_padding"
+        >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/item_last_fm_image_size"
+            android:layout_height="@dimen/item_last_fm_image_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:imageUrl="@{cover.url}"
+            tools:src="@drawable/ic_album"
+            />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image"
+            style="@style/last_fm_text_track_name"
+            android:text="@{track.name}"
+            tools:text="Yonkers"
+            />
+
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/image"
+            android:text="@{track.artist}"
+            style="@style/last_fm_text"
+            tools:text="Tyler, the Creator"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
